@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: SlateGray;}
+h1   {color: Indigo;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> JavaScript by Joshua </h1>
+
+<input type=button value="simple if" onclick="{ 
+		
+   myTemp = ''				
+
+   x=5 
+
+   if (x>6) { myTemp +='larger than 6'}
+
+   else{ myTemp+= 'less than 6' }
+
+   document.getElementById('myDiv01').innerHTML = myTemp
+								
+}">
+
+
+<div id="myDiv01"> </div>
+
+<br> <br> <br> <br> <br>
+
+<input type=button value="Range" onclick="{ 
+		
+   myTemp = ''				
+
+   x=27
+
+   if ((x>17)&&(x<39)) { myTemp +='between 17 and 39'}
+
+   else{ myTemp+= 'Is not in range' }
+
+   document.getElementById('myDiv02').innerHTML = myTemp
+								
+}">
+
+
+<div id="myDiv02"> </div>
+
