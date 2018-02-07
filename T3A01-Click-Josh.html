@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: SeaGreen;}
+h1   {color: MediumBlue;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Webpage by Joshua </h1>
+
+<input type=button value="Click Me" onclick="{
+
+document.getElementById('myDiv01').innerHTML += 'Wow<br>'
+
+}">
+
+<br><br>
+
+<input type=button value="DO Not Click Me" onclick="{
+
+document.getElementById('myDiv02').innerHTML += 'Not So Wow<br>'
+
+}">
+
+<br><br>
+
+<div id="myDiv01" ></div>
+
+<div id="myDiv02" ></div>
