@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: SlateGray;}
+h1   {color: Indigo;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Loop by Joshua </h1>
+
+  x= <input id="myText01" type=text value=10 size=4><br>
+
+  <input type=button value="loop" onclick="{
+  
+  myTemp = ''
+  myInput= document.getElementById('myText01').value
+
+  for(myLoop = 1; myLoop <= 90000; myLoop++) {
+  
+  myTemp += myLoop + ', '+ myInput + '<br>'
+
+  }
+
+  document.getElementById('myDiv01').innerHTML = myTemp
+  }">
+
+  <div id="myDiv01"></div><br>
