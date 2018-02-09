@@ -17,11 +17,20 @@ p    {color: red;}
   myTemp = ''
   myInput= document.getElementById('myText01').value
 
-  for(myLoop = 1; myLoop <= 90000; myLoop++) {
+  var myMinutes = new Date();
+  myTemp += myMinutes.getMinutes() + ' min <br>'
+
+  for(myLoop = 1; myLoop <= myInput; myLoop++) {
   
   myTemp += myLoop + ', '+ myInput + '<br>'
 
   }
+
+  var myMinutes2 = new Date();
+  myTotal = (myMinutes2 - myMinutes)/1000
+
+  myTemp += myMinutes2.getMinutes() + ' min <br> duration = '+
+  myTotal +' seconds <br>'
 
   document.getElementById('myDiv01').innerHTML = myTemp
   }">
