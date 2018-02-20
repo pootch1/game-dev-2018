@@ -10,18 +10,95 @@ p    {color: red;}
 
 <h1 align=center> Forms by Joshua </h1>
 
-<input type=password value=secret><br><br>
 
-<input type=radio name=myRad > <br><br>
+<input type=button value="Password Box" onclick="{
 
-<input type=checkbox ><br><br>
+document.getElementById('myDiv01').innerHTML += '<input type=password value=secret><br><br>'
 
-<input type=submit><br><br>
+}">
 
-<input type=reset ><br><br>
+<br><br>
 
-<input type=range value=3 Max=10> <br><br>
+<input type=button value="Radio Button" onclick="{
 
-<input id="myText01" type=text value=Fred> <br><br>
-
-<input id="myFile01" type=file> <br><br>
+document.getElementById('myDiv02').innerHTML += '<input type=radio name=myRad ><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="CheckBox" onclick="{
+
+document.getElementById('myDiv03').innerHTML += '<input type=checkbox ><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="Submit Button" onclick="{
+
+document.getElementById('myDiv04').innerHTML += '<input type=submit><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="Reset Button" onclick="{
+
+document.getElementById('myDiv05').innerHTML += '<input type=reset ><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="Slider" onclick="{
+
+document.getElementById('myDiv06').innerHTML += '<input type=range value=3 Max=10><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="Textbox" onclick="{
+
+document.getElementById('myDiv07').innerHTML += '<input id=/'myText01/' type=text value=Textbox><br><br>'
+
+}">
+
+<br><br>
+
+<input type=button value="File Select" onclick="{
+
+document.getElementById('myDiv08').innerHTML += '<input id=/'myFile01/' type=file><br><br>'
+
+
+}">
+
+<br><br>
+
+<input type=button value="Select Box" onclick="{
+
+document.getElementById('myDiv09').innerHTML += '<select size=1><option><option>Morning<option>Noon<option>Afternoon<option>Evening</select><br><br>'
+
+}">
+
+<br><br>
+
+
+<div id="myDiv01" ></div>
+
+<div id="myDiv02" ></div>
+
+<div id="myDiv03" ></div>
+
+<div id="myDiv04" ></div>
+
+<div id="myDiv05" ></div>
+
+<div id="myDiv06" ></div>
+
+<div id="myDiv07" ></div>
+
+<div id="myDiv08" ></div>
+
+<div id="myDiv09" ></div>
