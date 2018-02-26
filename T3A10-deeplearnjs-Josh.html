@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: Slategray;}
+h1   {color: Purple;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Deeplearning Trials </h1>
+
+<script src="https://unpkg.com/deeplearn@0.4.2/dist/deeplearn.js"> </script> 
+
+From deeplearnjs tutorial at: <a href="https://deeplearnjs.org/docs/tutorials/ml_beginners.html">https://deeplearnjs.org/docs/tutorials/ml_beginners.html</a><br><br>
+
+<input id="myButton01" type="button" value="Quadratic y = a * x^2 + b * x + c" onclick="{
+    var graph = new deeplearn.Graph();
+    var x_1 = graph.placeholder('x', []);
+    var a = graph.variable('a', deeplearn.Scalar.new(Math.random()));
+    var b = graph.variable('b', deeplearn.Scalar.new(Math.random()));
+    var c = graph.variable('c', deeplearn.Scalar.new(Math.random()));
+    var order2 = graph.multiply(a, graph.square(x_1));
+    var order1 = graph.multiply(b, x_1);
+    var y_1 = graph.add(graph.add(order2, order1), c);
+    var yLabel_1 = graph.placeholder('y label', []);
+    var cost_1 = graph.meanSquaredCost(y_1, yLabel_1);
+    var math = dl.ENV.math;
+    var session_1 = new deeplearn.Session(graph, math);
+
+
+    document.getElementById('myDiv01').innerHTML   =  'Solving the Quadratic y = 3x^2 + 2x + 1<br>'      
+    document.getElementById('myDiv01').innerHTML   +=  'By training the browser to work towards a given line with error<br>'   
+    document.getElementById('myDiv01').innerHTML   +=  'Defined by [0,1.1],[1,5.9],[2,16.8],[3,33.9]<br>'                        
+    document.getElementById('myDiv01').innerHTML   +=  '<br>using x = 4 the Quadratic result should be about 57.0 +- 2<br>' 
+
+
+    math.scope(function (keep) {
+        var result = session_1.eval(y_1, [{ tensor: x_1, data: deeplearn.Scalar.new(4) }]);
+
+
+       document.getElementById('myDiv01').innerHTML   += 'Initial Guess =' + result.getValues()+'<br><br>'
+
+        var xs = [
+            deeplearn.Scalar.new(0), deeplearn.Scalar.new(1), deeplearn.Scalar.new(2),
+            deeplearn.Scalar.new(3)
+        ];
+        var ys = [
+            deeplearn.Scalar.new(1.1), deeplearn.Scalar.new(5.9), deeplearn.Scalar.new(16.8),
+            deeplearn.Scalar.new(33.9)
+        ];
+        var shuffledInputProviderBuilder = new deeplearn.InCPUMemoryShuffledInputProviderBuilder([xs, ys]);        
+        var _a = shuffledInputProviderBuilder.getInputProviders();
+        var xProvider = _a[0];
+        var yProvider = _a[1];
+        var NUM_BATCHES = 20;
+        var BATCH_SIZE = xs.length;
+        var LEARNING_RATE = .01;
+        var optimizer = new deeplearn.SGDOptimizer(LEARNING_RATE);
+       
+
+         for (var i = 0; i < NUM_BATCHES; i++) {
+            var costValue = session_1.train(cost_1, [{ tensor: x_1, data: xProvider }, { tensor: yLabel_1, data: yProvider }], BATCH_SIZE, optimizer, deeplearn.CostReduction.MEAN);
+
+            document.getElementById('myDiv01').innerHTML   += 'average cost: ' + costValue.get() + '<br>'
+        }
+        result = session_1.eval(y_1, [{ tensor: x_1, data: deeplearn.Scalar.new(4) }]);
+
+       document.getElementById('myDiv01').innerHTML   += '<br><br>After training '+NUM_BATCHES+' batches with a learning rate of '+ LEARNING_RATE+ '<br>'                                                                 
+       document.getElementById('myDiv01').innerHTML   += 'With an input of 4 the output =' + result.getValues() + '<br>'                                                                 
+                                                                                                                                                                                                                                
+    });                                                           
+                                                                            
+                                                                            
+}"><br>
+
+<div id="myDiv01">...</div>
+
+<br>
+
+
+
+
+<script src="https://unpkg.com/deeplearn@0.3.13/dist/deeplearn.js"> </script> 
+
+
+
+<script src="https://unpkg.com/deeplearn-squeezenet@0.1.2/dist/bundle.js"></script>
+    
+<h2 align="center"> <a href="https://deeplearnjs.org/demos/playground/examples.html">SqueezeNet and DeeplearnJS Playground</a></h2>
+
+<script>
+
+async function myCheckImage(){
+  dl = deeplearn
+  const catImage = document.getElementById('cat');
+  const math = new dl.NDArrayMathGPU();
+  const squeezeNet = new squeezenet.SqueezeNet(math);
+  await squeezeNet.load();
+
+  const image = dl.Array3D.fromPixels(document.getElementById('cat'));
+  const inferenceResult = await squeezeNet.predict(image);
+  const topClassesToProbs = await squeezeNet.getTopKClasses(inferenceResult.logits, 10);
+
+  document.getElementById('myDiv04').innerHTML = ''   // clear the div
+  for (const className in topClassesToProbs) {  
+    document.getElementById('myDiv04').innerHTML += topClassesToProbs[className].toFixed(5) + ' : '+ className + '<br>'
+  }
+}
+
+
+async function myLoadImage(myEvent){
+    myEvent.preventDefault(); 
+    myEvent.stopPropagation();   
+    document.getElementById('cat').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    setTimeout('myCheckImage()', 200)
+}
+
+
+</script>
+
+
+Save an image of an animal to a folder and then drag the image on top of the loaded image.  <br> 
+
+
+
+  <img onload="myCheckImage()" id="cat" src="https://storage.googleapis.com/learnjs-data/images/cat.jpeg" width="227" height="227" crossorigin="" ondrop="{ 
+     myLoadImage(event)
+  }" ondragover="{
+    event.preventDefault(); 
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+    document.getElementById('myDiv04').innerHTML = 'drag over'
+  }"><br><br>
+
+
+
+<input type="button" value="Reset Output DIV" onclick="{
+   document.getElementById('myDiv04').innerHTML = '...'                                             
+}">
+
+<input type="button" value="Search SqueezeNet" onclick="{
+     myCheckImage()                                     
+}"><br><br>
+    
+<div id="myDiv04">0.67480 : tabby, tabby cat<br>0.16857 : tiger cat<br>0.15657 : Egyptian cat<br>0.00003 : lynx, catamount<br>0.00003 : tiger, Panthera tigris<br>0.00000 : plastic bag<br>0.00000 : great grey owl, great gray owl, Strix nebulosa<br>0.00000 : carton<br>0.00000 : Siamese cat, Siamese<br>0.00000 : hen<br></div><br>  
+
+<script src="https://unpkg.com/deeplearn@0.4.2/dist/deeplearn.js"> </script> 
+
+
+
+
+
+<script>
+
+  
+const TRAIN_TEST_RATIO = 5 / 6;
+const LEARNING_RATE = .05;
+const BATCH_SIZE = 64;
+const TRAIN_STEPS = 100;
+const IMAGE_SIZE = 784;
+const LABELS_SIZE = 10;
+
+
+const myMath = dl.ENV.math;
+
+var myData;
+
+const weights = dl.variable(dl.Array2D.randNormal([IMAGE_SIZE, LABELS_SIZE], 0, 1 / Math.sqrt(IMAGE_SIZE), 'float32'));
+
+const optimizer = new dl.SGDOptimizer(LEARNING_RATE);
+
+
+const mnistConfig = {
+    'data': [
+        {
+            'name': 'images',
+            'path': 'https://storage.googleapis.com/learnjs-data/model-builder/' +
+                'mnist_images.png',
+            'dataType': 'png',
+            'shape': [28, 28, 1]
+        },
+        {
+            'name': 'labels',
+            'path': 'https://storage.googleapis.com/learnjs-data/model-builder/' +
+                'mnist_labels_uint8',
+            'dataType': 'uint8',
+            'shape': [10]
+        }
+    ],
+    modelConfigs: {}
+};
+
+
+
+///////////////////////// End Initilizations //////////////////////////////////////////////////
+
+// Main class that is used
+class MnistData {   
+    
+    constructor() {
+        this.shuffledTrainIndex = 0;
+        this.shuffledTestIndex = 0;
+    }
+    
+    
+    nextTrainBatch(batchSize) {
+        return this.nextBatch(batchSize, this.trainingData, () => {
+            this.shuffledTrainIndex = (this.shuffledTrainIndex + 1) % this.trainIndices.length;
+            return this.trainIndices[this.shuffledTrainIndex];
+        });
+    }
+    
+    
+    
+    nextTestBatch(batchSize) {
+        return this.nextBatch(batchSize, this.testData, () => {
+            this.shuffledTestIndex =
+                (this.shuffledTestIndex + 1) % this.testIndices.length;
+            return this.testIndices[this.shuffledTestIndex];
+        });
+    }
+    
+    
+    
+    nextBatch(batchSize, myData, index) {
+        let xs = null;
+        let labels = null;
+        for (let i = 0; i < batchSize; i++) {
+            const idx = index();
+            const x = myData[0][idx].reshape([1, 784]);
+            xs = concatWithNulls(xs, x);
+            const label = myData[1][idx].reshape([1, 10]);
+            labels = concatWithNulls(labels, label);
+        }
+        return { xs, labels };
+    }
+   
+    // Load all the MNIST data 
+    async load() {
+        this.dataset = new dl.XhrDataset(mnistConfig);
+        await this.dataset.fetchData();
+        this.dataset.normalizeWithinBounds(0, -1, 1);
+        this.trainingData = this.getTrainingData();
+        this.testData     = this.getTestData();
+        this.trainIndices = dl.util.createShuffledIndices(this.trainingData[0].length);
+        this.testIndices  = dl.util.createShuffledIndices(this.testData[0].length);
+    }
+    
+    
+    getTrainingData() {
+        const [images, labels] = this.dataset.getData();
+        const end = Math.floor(TRAIN_TEST_RATIO * images.length);
+        return [images.slice(0, end), labels.slice(0, end)];
+    }
+    
+    
+    getTestData() {
+        const myData = this.dataset.getData();
+        if (myData == null) { return null; }
+        const [images, labels] = this.dataset.getData();
+        const start = Math.floor(TRAIN_TEST_RATIO * images.length);
+        return [images.slice(start), labels.slice(start)];
+    }
+    
+}  // end of class MnistData  definition
+
+
+// A helper for the NextBatch function above
+function concatWithNulls(ndarray1, ndarray2) {
+    if (ndarray1 == null && ndarray2 == null) {
+        return null;
+    }
+    if (ndarray1 == null) {
+        return ndarray2;
+    }
+    else if (ndarray2 === null) {
+        return ndarray1;
+    }
+    return myMath.concat2D(ndarray1, ndarray2, 0);
+}
+
+
+ 
+/////////////////////////// End of the Class Definition and Helper function ///////////////
+
+
+ 
+
+
+// Train the model.
+async function train(myData) {
+    const returnCost = true;
+    for (let i = 0; i < TRAIN_STEPS; i++) {
+        const cost = optimizer.minimize(() => {
+            const batch = myData.nextTrainBatch(BATCH_SIZE);
+            return myMath.mean(myMath.softmaxCrossEntropyWithLogits(batch.labels, myMath.matMul(batch.xs, weights)));
+        }, returnCost);
+        document.getElementById('message').innerHTML = 'loss[' + i + ']:' +  cost.dataSync()
+        await dl.util.nextFrame();
+    }
+}
+
+
+
+
+
+/////////////////////////////////// End Training the Machine /////////////////////////////////////////////////////////////
+
+
+
+
+// Predict the digit number from a batch of input images.
+function predict(x) {
+    const pred = myMath.scope(() => {
+        const axis = 1;
+        return myMath.argMax(myMath.matMul(x, weights), axis);
+    });
+    return Array.from(pred.dataSync());
+}
+
+
+async function showTestResults(batch, predictions, labels) {
+    var testExamples = batch.xs.shape[0];
+    var totalCorrect = 0;
+    for (var i = 0; i < testExamples; i++) {
+        var image = myMath.slice2D(batch.xs, [i, 0], [1, batch.xs.shape[1]]);
+        var div = document.createElement('div');
+        div.className = 'pred-container';
+        var canvas = document.createElement('canvas');
+        draw(image.flatten(), canvas);
+        var pred = document.createElement('div');
+        var prediction = predictions[i];
+        var label = labels[i];
+        var correct = prediction === label;
+        if (correct) {
+            totalCorrect++;
+        }
+        pred.className = "pred " + (correct ? 'pred-correct' : 'pred-incorrect');
+        pred.innerText = "pred: " + prediction;
+        
+        div.appendChild(pred);
+        div.appendChild(canvas);
+        document.getElementById('images').appendChild(div);
+    }
+    var accuracy = 100 * totalCorrect / testExamples;
+    var displayStr = 'Accuracy: ' + accuracy.toFixed(2) + ' % (' + totalCorrect + ' / ' + testExamples + ')';
+    document.getElementById('message').innerHTML += '<br>'+ displayStr + '<br>';
+    //console.log(displayStr);
+}
+
+
+
+function draw(image, canvas) {
+    const [width, height] = [28, 28];
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    const imageData = new ImageData(width, height);
+    const myData = image.dataSync();
+    for (let i = 0; i < height * width; ++i) {
+        const j = i * 4;
+        imageData.data[j + 0] = myData[i] * 255;
+        imageData.data[j + 1] = myData[i] * 255;
+        imageData.data[j + 2] = myData[i] * 255;
+        imageData.data[j + 3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+/////////////////////////// End Drawing the Images //////////////////////////////////////
+
+
+// Main Entry point
+async function myMnist() {
+    
+    // Load Mnist Dataset
+    document.getElementById('status').innerText = ' Loading...'
+    myData = new MnistData(); 
+    await myData.load();      
+    
+    // Train the network
+    document.getElementById('status').innerText += ' Training...'
+    await train(myData);
+    
+    // Make some predictions, testing the network
+    
+    document.getElementById('images').innerText = ''  
+    document.getElementById('status').innerText += ' Testing...';
+    const testExamples = 50;
+    const batch = myData.nextTestBatch(testExamples);
+    const predictions = predict(batch.xs);
+
+    // Given a logits or label vector, return the class indices.
+    const axis = 1;
+    const pred = myMath.argMax(batch.labels, axis);
+    const labels = Array.from(pred.dataSync());
+    
+    
+    document.getElementById('status').innerText += ' Predicting...';
+    showTestResults(batch, predictions, labels);
+}  // End of Main program
+
+
+/////////////////////// End main Program /////////////////////////////////
+
+</script>
+
+
+
+
+
+<style>
+  canvas {
+    width: 100px;
+  }
+  .pred {
+    font-size: 30px;
+    width: 100px;
+  }
+  .pred-correct {
+    background-color: #00cf00;
+  }
+  .pred-incorrect {
+    background-color: red;
+  }
+  .pred-container {
+    display: inline-block;
+    width: 100px;
+    margin: 10px;
+  }
+</style>
+
+
+
+<!--- Main part of the webpage ---->
+
+
+<h2 align="center">Easiest Model Builder Using <a href="http://deeplearnjs.org">Deeplearnjs</a> in Pure Javascript</h2>
+See original at <a href="https://deeplearnjs.org/demos/model-builder/">https://deeplearnjs.org/demos/model-builder/</a>
+and try to build the easiest version of a model. Delete all layers until you only have:
+Flattened, Fully Connected, Softmax, Label. That is what is working here.<br><br>
+
+
+<!--- The only button webpage ---->
+
+<input type="button" value="run" onclick="{
+   myMnist();
+}">
+
+
+<!--- A few Div's to communicate with the webpage ---->
+
+<div id="status">Status Here</div>
+<div id="message">Messages Here</div>
+<div id="images">The Images Here</div>
