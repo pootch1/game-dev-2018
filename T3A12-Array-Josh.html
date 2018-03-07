@@ -1,0 +1,70 @@
+<html>
+<head>
+<style>
+body {background-color: Slategray;}
+h1   {color: Purple;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Arrays </h1>
+
+<input type=button value="Run myStuff" onclick="
+
+//alert( Math.floor(Math.random()*9+1) )
+
+myStuff = new Array()
+
+myStuff[0] = 'Cell Phone'
+
+myStuff[1] = 'Shoes'
+
+myStuff[2] = 'Pants' 
+
+myStuff[3] = 'Hat' 
+
+myStuff[4] = 'Glasses' 
+
+myStuff[5] = 'Coat' 
+
+myStuff[6] = 'Shirt' 
+
+myStuff[7] = 'Socks'
+
+for (myLoop=0; myLoop <= 7; myLoop++ ){
+
+document.getElementById('myDiv01').innerHTML += myStuff[myLoop] + ' <br>'
+
+}
+
+"><br><br>
+
+<div id="myDiv01"></div><br>
+
+Loop this amount <input type=text id="myText01" size=6 value= 5><br>
+
+<input type=button value="Run myRandom" onclick="
+
+myRandomNumber = new Array()
+
+myRandomNumber[0] = Math.floor(Math.random()*9+1)
+
+document.getElementById('myDiv02').innerHTML += myRandomNumber[0] + ' <br>'
+
+// sort the values
+
+for (myLoop=0; myLoop <= 7; myLoop++ ){
+
+if (myRandomNumber[myLoop] > myRandomNumber[myLoop + 1] ){
+
+myTemp = myRandomNumber[myLoop] // you finish two more lines
+
+}
+
+}
+
+// print them again
+
+"><br>
+
+<div id="myDiv02"></div>
