@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: Slategray;}
+h1   {color: Purple;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Functions </h1>
+
+<script>
+
+function myGuardian(myX){
+
+alert('Your ' + myX + ' are dirty')
+
+}
+
+function myGladiator(myY){
+
+alert(myY + ' had a stroke')
+
+}
+
+</script>
+
+<input type=button value="Where are my socks" onclick="{
+
+myGuardian('Socks')
+
+}"> 
+
+<input type=button value="Where are my shoes" onclick="{
+
+myGuardian('Shoes')
+
+}"> <br> <br>
+
+<input type=button value="What happened to George" onclick="{
+
+myGladiator('George')
+
+}"> 
+
+<input type=button value="What happened to Mary" onclick="{
+
+myGladiator('Mary')
+
+}"> <br> <br>
+
+<input type=button value="inline function" onclick="{
+
+(function () {
+
+alert('inline works')
+
+})()
+
+}">
