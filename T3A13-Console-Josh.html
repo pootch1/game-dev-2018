@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: Slategray;}
+h1   {color: Purple;}
+p    {color: red;}
+</style>
+</head>
+
+<h1 align=center> Console Commands </h1>
+
+ctrl-shift-i to activate console<br><br>
+
+<input type=button value="console.log" onclick="{
+
+console.log('Hello Console')
+
+}"><br><br>
+
+<input type=button value="console.info" onclick="{
+
+console.info('Here is your pamphlet')
+
+}"><br><br>
+
+<input type=button value="console.warn" onclick="{
+
+console.warn('Warning')
+
+}"><br><br>
+
+<input type=button value="console.error" onclick="{
+
+console.error('Error, Windows Vista will now restart')
+
+}"><br><br>
+
+<input type=button value="Variables" onclick="{
+
+console.log('The calling type' + this.type)
+
+}"><br><br>
+
+<input type=button value="console.trace()" onclick="{
+
+console.trace()
+
+}"><br><br>
+
+<input type=button value="Console timer start" onclick="{
+
+console.time()
+
+}"><br><br>
+
+<input type=button value="Console timer end" onclick="{
+
+console.timeEnd()
+
+}"><br><br>
+
+<input type=button value="console.memory" onclick="{
+
+console.error(console.memory)
+
+}"><br><br>
+
+<input type=button value="console.profile" onclick="{
+
+console.profile('Test profile')
+
+console.warn('Profile reactor starting')
+
+console.warn('Profile reactor over-heating')
+
+console.error('Profile reactor detonation imminent')
+
+console.profileEnd('Test profile')
+
+}"><br><br>
+
+<input type=button value="console.assert(true)" onclick="{
+
+console.assert(true, 'Do not log this')
+
+}"><br><br>
+
+<input type=button value="console.assert(false)" onclick="{
+
+console.assert(false, 'Log this')
+
+}"><br><br>
+
+<input type=button value="console.group" onclick="{
+console.group('1')
+console.group('2')
+console.groupEnd('1')
+console.groupEnd('2')
+
+}"><br><br>
+
+<input type=button value="console.count" onclick="{
+
+for (myLoop=0; myLoop<=4; myLoop++){
+          console.count('counting')
+		              }
+
+}"><br><br>
+
+<input type=button value="console.clear" onclick="{
+
+console.clear()
+
+}"><br><br>
+
+<input type=button value="console.table" onclick="{
+
+for (myLoop=0; myLoop<=4; myLoop++){
+         console.table([{name: 'Joshua', age:myLoop}])
+                }
+}"><br><br>
