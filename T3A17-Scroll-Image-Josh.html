@@ -1,0 +1,47 @@
+<html>
+
+<head>
+
+<style>
+
+</style>
+
+
+<script>
+
+myBgPosX = 0
+
+myBgPosY = 0
+
+function myScroll() {
+
+myBgPosX += -3;
+
+myBgPosY += 0;
+
+myBgObject.style.backgroundPosition = myBgPosX+" " + myBgPosY;
+
+}
+
+</script>
+
+</head>
+
+<body background="https://i.pinimg.com/originals/6c/50/59/6c5059b41d18a6bf960618cc18a8ae13.jpg" onload="{
+
+myTimer = setInterval('myScroll()', 50)
+
+}" >
+
+
+<script> // This object must be after the body tag
+
+myBgObject = eval('document.body');
+
+</script>
+
+<IMG STYLE="position:absolute; TOP:320px; LEFT:600px; WIDTH:150px; HEIGHT:150px" SRC="http://rs264.pbsrc.com/albums/ii162/I-So-Cunfooosed/Animations/raccoonmario2.gif~c200">
+
+</body>
+
+</html>
