@@ -45,7 +45,7 @@ parseInt(document.getElementById('myDiv01').style.left) + 6
 
 if (myHitOther('myDiv01', 'myDiv02')){
 
-alert('You hit')
+document.getElementById('myDiv03').innerHTML += 'You hit'
 
 document.getElementById('myDiv01').style.left = '20'
 
@@ -61,7 +61,7 @@ parseInt(document.getElementById('myDiv01').style.left) - 6
 
 if (myHitOther('myDiv01', 'myDiv02')){
 
-alert('You hit')
+document.getElementById('myDiv03').innerHTML += 'You hit'
 
 document.getElementById('myDiv01').style.left = '20'
 
@@ -77,7 +77,7 @@ parseInt(document.getElementById('myDiv01').style.top) - 6
 
 if (myHitOther('myDiv01', 'myDiv02')){
 
-alert('You hit')
+document.getElementById('myDiv03').innerHTML += 'You hit'
 
 document.getElementById('myDiv01').style.left = '20'
 
@@ -93,7 +93,7 @@ parseInt(document.getElementById('myDiv01').style.top) + 6
 
 if (myHitOther('myDiv01', 'myDiv02')){
 
-alert('You hit')
+document.getElementById('myDiv03').innerHTML += 'You hit'
 
 document.getElementById('myDiv01').style.left = '20'
 
@@ -105,3 +105,5 @@ document.getElementById('myDiv01').style.left = '20'
 <div id="myDiv01" style="position:absolute; left:20; top:80; width:30; height:20;">Missle</div><br>
 
 <div id="myDiv02" style="position:absolute; left:100; top:80; width:30; height:20;">Meteor</div><br>
+
+<div id="myDiv03" ></div>
