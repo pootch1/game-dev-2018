@@ -20,7 +20,7 @@ myBgWidth = 753; // width of background image
 
 myBgSpeedYdown = 0; // speed moving down
 
-myBgSpeedXright = 1; // speed moving right
+myBgSpeedXright = -2; // speed moving right
 
 <!-- ******************** Background Scrolling ************************** -->
 
@@ -229,7 +229,7 @@ if(event.keyCode==32) { myGunPrep() }
 }">
 
 <script> // This object must be after the body tag
-d
+
 myBgObject = eval('document.body');
 
 </script>
@@ -262,13 +262,13 @@ Click to hide.
 
 <!-- ******************** Following should be all your images ************************** -->
 
-<img id="move1" src="Move1pic.png" style="position:absolute; width:30px; height:30px; left:30px; top:250px" onClick="myGunPrep()">
+<img id="move1" src="Move1pic.png" style="position:absolute; width:38px; height:40px; left:30px; top:250px" onClick="myGunPrep()">
 
 <img id="move2" src="Move2Pic.png" style="position:absolute; width:30px; height:30px; left:500px; top:240px;"/>
 
 <input type=button value="Fire" onClick="myGunPrep()">
 
-<img id="bullet1" src="Bullet1pic.png" style="position:absolute; width:10px; height:10px; left:500px; top:240px; visibility:hidden"/>
+<img id="bullet1" src="fireball.gif" style="position:absolute; width:45px; height:45px; left:500px; top:220px; visibility:hidden"/>
 
 <!-- ******************** This is the silly little dot the main object hits ************************** -->
 
