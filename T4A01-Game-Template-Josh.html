@@ -1,3 +1,5 @@
+<! -- T4A01-GAME-TEMPLATE-FRED.HTML -->
+
 <html>
 
 <head>
@@ -16,9 +18,9 @@ myBgHeight = 402; // height of background image
 
 myBgWidth = 753; // width of background image
 
-myBgSpeedYdown = 1; // speed moving down
+myBgSpeedYdown = 0; // speed moving down
 
-myBgSpeedXright = 0; // speed moving right
+myBgSpeedXright = 1; // speed moving right
 
 <!-- ******************** Background Scrolling ************************** -->
 
@@ -154,7 +156,7 @@ document.mySpeedX *= -1
 
 }
 
-document.getElementById('move1').style.left = parseInt(document.getElebackmentById('move1').style.left)+document.mySpeedX+'px'
+document.getElementById('move1').style.left = parseInt(document.getElementById('move1').style.left)+document.mySpeedX+'px'
 
 document.getElementById('move1').style.top = parseInt(document.getElementById('move1').style.top)+document.mySpeedY+'px'
 
@@ -204,25 +206,35 @@ document.getElementById('bullet1').style.left = parseInt(document.getElementById
 
 <!-- ******************** onkeypress just for webpages is useless on mobile apps ************************** -->
 
-<body background="BackPic.png" onload="myTimer = setInterval('myScroll()', 100)" onkeypress="{
+<body background="background.jpg" onload="myTimer = setInterval('myScroll()', 100)" onkeypress="{
 
-if(event.keyCode==97){ document.getElementById('move1').style.left = parseInt(document.getElementById('move1').style.left)-5+'px'} // small 'a' key go left
+if(event.keyCode==97){ document.getElementById('move1').style.left = parseInt(document.getElementById('move1').style.left)-5+'px'}
 
-if(event.keyCode==119){ document.getElementById('move1').style.top = parseInt(document.getElementById('move1').style.top)-5+'px'} // small 'w' key go up
+if(event.keyCode==119){ document.getElementById('move1').style.top = parseInt(document.getElementById('move1').style.top)-5+'px'}
 
 if(event.keyCode==115){ document.getElementById('move1').style.top = parseInt(document.getElementById('move1').style.top)+5+'px'}
 
 if(event.keyCode==100){ document.getElementById('move1').style.left = parseInt(document.getElementById('move1').style.left)+5+'px'}
 
+if(event.keyCode==106){ document.getElementById('move2').style.left = parseInt(document.getElementById('move2').style.left)-5+'px'}
+
+if(event.keyCode==105){ document.getElementById('move2').style.top = parseInt(document.getElementById('move2').style.top)-5+'px'}
+
+if(event.keyCode==107){ document.getElementById('move2').style.top = parseInt(document.getElementById('move2').style.top)+5+'px'}
+
+if(event.keyCode==108){ document.getElementById('move2').style.left = parseInt(document.getElementById('move2').style.left)+5+'px'}
+
+if(event.keyCode==32) { myGunPrep() }
+
 }">
 
 <script> // This object must be after the body tag
-
+d
 myBgObject = eval('document.body');
 
 </script>
 
-<h2 align=center style="background-color:forestgreen"> Game Base by ___Your Name Here ___</h2>
+<h2 align=center style="background-color:forestgreen"> Game Base by Joshua</h2>
 
 <!-- ******************** Some instructions that magically disappear ************************** -->
 
@@ -234,15 +246,13 @@ document.getElementById('myInstructions').style.visibility = 'hidden'}
 
 <ol>Instructions here:
 
-<li> Make you own game
+<li> Try out the buttons
 
-<li> For this demonstration. click the buttons and the red box
+<li> W, A, S, D, moves and Space fires
 
-<li> Delete the buttons you do not want in your game.
+<li> I, J, K, L, moves the block
 
-<li> Look at the code for each button to see how to make buttons for other directions
-
-<li>You might want to use <a href="http://www.online-image-editor.com/">http://www.online-image-editor.com/</a>
+<li> Shoot the block
 
 </ol>
 
@@ -254,7 +264,7 @@ Click to hide.
 
 <img id="move1" src="Move1pic.png" style="position:absolute; width:30px; height:30px; left:30px; top:250px" onClick="myGunPrep()">
 
-<img id="move2" src="Move2pic.png" style="position:absolute; width:30px; height:30px; left:500px; top:240px;"/>
+<img id="move2" src="Move2Pic.png" style="position:absolute; width:30px; height:30px; left:500px; top:240px;"/>
 
 <input type=button value="Fire" onClick="myGunPrep()">
 
