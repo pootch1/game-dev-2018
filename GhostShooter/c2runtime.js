@@ -18917,5 +18917,7 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Keyboard.prototype.cnds.OnKey,
 	cr.plugins_.Sprite.prototype.exps.Count,
 	cr.system_object.prototype.acts.SetVar,
-	cr.system_object.prototype.acts.GoToLayout
+	cr.system_object.prototype.acts.GoToLayout,
+	cr.plugins_.Keyboard.prototype.cnds.IsKeyDown,
+	cr.behaviors.EightDir.prototype.acts.SimulateControl
 ];};
